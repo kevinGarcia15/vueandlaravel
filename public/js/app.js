@@ -1978,6 +1978,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1994,6 +1995,9 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     addThought: function addThought(thought) {
       this.thougths.push(thought);
+    },
+    deleteThougth: function deleteThougth(index) {
+      this.thougths.splice(index, 1);
     }
   }
 });
@@ -2034,6 +2038,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['thougth'],
   data: function data() {
@@ -2041,6 +2049,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     console.log('Component mounted.');
+  },
+  methods: {
+    onClickDelete: function onClickDelete() {
+      this.$emit('delete');
+    }
   }
 });
 
@@ -37718,10 +37731,15 @@ var render = function() {
         _vm._v(" "),
         _c("br"),
         _vm._v(" "),
-        _vm._l(_vm.thougths, function(thougth) {
+        _vm._l(_vm.thougths, function(thougth, index) {
           return _c("thougth-component", {
             key: thougth.id,
-            attrs: { thougth: thougth }
+            attrs: { thougth: thougth },
+            on: {
+              delete: function($event) {
+                return _vm.deleteThougth(index)
+              }
+            }
           })
         })
       ],
@@ -37768,15 +37786,7 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _vm._m(0)
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card" }, [
+    _c("div", { staticClass: "card" }, [
       _c("div", { staticClass: "card-body" }, [
         _c(
           "button",
@@ -37791,14 +37801,20 @@ var staticRenderFns = [
           "button",
           {
             staticClass: "btn btn-danger",
-            attrs: { type: "button", name: "button" }
+            attrs: { type: "button", name: "button" },
+            on: {
+              click: function($event) {
+                return _vm.onClickDelete()
+              }
+            }
           },
           [_vm._v("\n                Eliminar\n            ")]
         )
       ])
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 

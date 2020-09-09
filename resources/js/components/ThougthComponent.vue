@@ -15,7 +15,11 @@
                 <button type="button" name="button" class="btn btn-default">
                     Editar
                 </button>
-                <button type="button" name="button" class="btn btn-danger">
+                <button
+                  type="button"
+                  name="button"
+                  class="btn btn-danger"
+                  v-on:click="onClickDelete()">
                     Eliminar
                 </button>
             </div>
@@ -32,6 +36,11 @@ export default {
   },
   mounted() {
     console.log('Component mounted.');
+  },
+  methods:{
+    onClickDelete(){
+      this.$emit('delete')
+    }
   },
 };
 

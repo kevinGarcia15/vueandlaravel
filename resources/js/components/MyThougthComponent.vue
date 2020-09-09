@@ -4,9 +4,10 @@
           <form-component @new="addThought"></form-component>
           <br>
           <thougth-component
-            v-for="thougth in thougths"
+            v-for="(thougth, index) in thougths"
             :key="thougth.id"
             :thougth="thougth"
+            @delete="deleteThougth(index)"
             >
           </thougth-component>
       </div>
@@ -30,6 +31,9 @@
     methods:{
       addThought(thought){
         this.thougths.push(thought)
+      },
+      deleteThougth(index){
+        this.thougths.splice(index, 1)
       }
     }
   }
