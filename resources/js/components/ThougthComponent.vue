@@ -4,7 +4,12 @@
             <div class="card-header">Publicado en {{thougth.created_at}}</div>
 
             <div class="card-body">
-                <p>
+                <input
+                  type="text"
+                  class="form-control"
+                  v-if="editMode"
+                  v-model="thougth.description">
+                <p v-else>
                     {{thougth.description}}
                 </p>
             </div>
@@ -12,7 +17,20 @@
 
         <div class="card">
             <div class="card-body">
-                <button type="button" name="button" class="btn btn-default">
+                <button
+                  type="button"
+                  name="button"
+                  class="btn btn-default"
+                  v-if="editMode"
+                  v-on:click="onClickUpdate()">
+                  Guardar Cambios
+                </button>
+                <button
+                  v-else
+                  type="button"
+                  name="button"
+                  class="btn btn-default"
+                  v-on:click="onClickEdit()">
                     Editar
                 </button>
                 <button
@@ -32,6 +50,7 @@ export default {
   props: ['thougth'],
   data() {
     return {
+      editMode: false
     };
   },
   mounted() {
@@ -40,6 +59,13 @@ export default {
   methods:{
     onClickDelete(){
       this.$emit('delete')
+    },
+    onClickEdit(){
+      this.editMode = true
+    },
+    onClickUpdate(){
+      this.editMode = false
+      this.$emit('update', thought)
     }
   },
 };

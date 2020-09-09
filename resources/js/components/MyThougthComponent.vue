@@ -7,6 +7,7 @@
             v-for="(thougth, index) in thougths"
             :key="thougth.id"
             :thougth="thougth"
+            @update="updateThouht(index, ...arguments)"
             @delete="deleteThougth(index)"
             >
           </thougth-component>
@@ -34,6 +35,9 @@
       },
       deleteThougth(index){
         this.thougths.splice(index, 1)
+      },
+      updateThouht(index, thought){
+        this.thougths[index] = thought
       }
     }
   }

@@ -1979,6 +1979,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1998,6 +1999,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     deleteThougth: function deleteThougth(index) {
       this.thougths.splice(index, 1);
+    },
+    updateThouht: function updateThouht(index, thought) {
+      this.thougths[index] = thought;
     }
   }
 });
@@ -2042,10 +2046,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['thougth'],
   data: function data() {
-    return {};
+    return {
+      editMode: false
+    };
   },
   mounted: function mounted() {
     console.log('Component mounted.');
@@ -2053,6 +2077,13 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     onClickDelete: function onClickDelete() {
       this.$emit('delete');
+    },
+    onClickEdit: function onClickEdit() {
+      this.editMode = true;
+    },
+    onClickUpdate: function onClickUpdate() {
+      this.editMode = false;
+      this.$emit('update', thought);
     }
   }
 });
@@ -37736,6 +37767,12 @@ var render = function() {
             key: thougth.id,
             attrs: { thougth: thougth },
             on: {
+              update: function($event) {
+                var i = arguments.length,
+                  argsArray = Array(i)
+                while (i--) argsArray[i] = arguments[i]
+                return _vm.updateThouht.apply(void 0, [index].concat(argsArray))
+              },
               delete: function($event) {
                 return _vm.deleteThougth(index)
               }
@@ -37776,26 +37813,67 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "card-body" }, [
-        _c("p", [
-          _vm._v(
-            "\n                " +
-              _vm._s(_vm.thougth.description) +
-              "\n            "
-          )
-        ])
+        _vm.editMode
+          ? _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.thougth.description,
+                  expression: "thougth.description"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "text" },
+              domProps: { value: _vm.thougth.description },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.thougth, "description", $event.target.value)
+                }
+              }
+            })
+          : _c("p", [
+              _vm._v(
+                "\n                " +
+                  _vm._s(_vm.thougth.description) +
+                  "\n            "
+              )
+            ])
       ])
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "card" }, [
       _c("div", { staticClass: "card-body" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-default",
-            attrs: { type: "button", name: "button" }
-          },
-          [_vm._v("\n                Editar\n            ")]
-        ),
+        _vm.editMode
+          ? _c(
+              "button",
+              {
+                staticClass: "btn btn-default",
+                attrs: { type: "button", name: "button" },
+                on: {
+                  click: function($event) {
+                    return _vm.onClickUpdate()
+                  }
+                }
+              },
+              [_vm._v("\n              Guardar Cambios\n            ")]
+            )
+          : _c(
+              "button",
+              {
+                staticClass: "btn btn-default",
+                attrs: { type: "button", name: "button" },
+                on: {
+                  click: function($event) {
+                    return _vm.onClickEdit()
+                  }
+                }
+              },
+              [_vm._v("\n                Editar\n            ")]
+            ),
         _vm._v(" "),
         _c(
           "button",
