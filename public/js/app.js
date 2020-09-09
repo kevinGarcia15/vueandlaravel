@@ -1941,13 +1941,17 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     newThougth: function newThougth() {
-      var thougth = {
-        id: 2,
-        description: this.description,
-        created_at: '09/09/2020'
+      var _this = this;
+
+      var params = {
+        description: this.description
       };
-      this.$emit('new', thougth);
       this.description = '';
+      axios.post('/thoughts', params).then(function (response) {
+        var thougth = response.data;
+
+        _this.$emit('new', thougth);
+      });
     }
   }
 });
@@ -1983,15 +1987,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      thougths: [{
-        'id': 1,
-        'description': 'abc',
-        'created_at': '01/09/2020'
-      }]
+      thougths: []
     };
   },
   mounted: function mounted() {
-    console.log('Component thouth mounted');
+    var _this = this;
+
+    axios.get('/thoughts').then(function (response) {
+      _this.thougths = response.data;
+    });
   },
   methods: {
     addThought: function addThought(thought) {

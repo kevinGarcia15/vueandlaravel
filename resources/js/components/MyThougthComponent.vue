@@ -19,15 +19,14 @@
   export default{
     data(){
       return {
-        thougths:[{
-          'id': 1,
-          'description': 'abc',
-          'created_at': '01/09/2020'
-        }]
+        thougths:[]
       }
     },
     mounted(){
-        console.log('Component thouth mounted')
+      axios.get('/thoughts')
+        .then((response)=>{
+          this.thougths = response.data;
+        })
     },
     methods:{
       addThought(thought){

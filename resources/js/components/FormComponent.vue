@@ -32,13 +32,17 @@
     },
     methods:{
       newThougth(){
-        let thougth = {
-          id:2,
-          description: this.description,
-          created_at: '09/09/2020'
-        }
-        this.$emit('new', thougth)
+        const params = {
+          description: this.description
+        };
+
         this.description = ''
+
+        axios.post('/thoughts', params)
+          .then((response)=>{
+            const thougth = response.data;
+            this.$emit('new', thougth)
+          });
       }
     }
   }
