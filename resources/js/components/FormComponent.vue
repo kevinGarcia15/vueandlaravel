@@ -32,7 +32,13 @@
     },
     methods:{
       newThougth(){
-        alert(this.description)
+        let thougth = {
+          id:2,
+          description: this.description,
+          created_at: '09/09/2020'
+        }
+        this.$emit('new', thougth)
+        this.description = ''
       }
     }
   }

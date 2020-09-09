@@ -26,17 +26,13 @@
 <script>
 export default {
   props: ['thougth'],
-    data(){
-      return{
-        thougth:{
-          id:'',
-          description:'',
-          created_at:''
-        }
-      }
-    },
-    mounted() {
-        console.log("Component mounted.");
-    }
+  data() {
+    return {
+    };
+  },
+  mounted() {
+    console.log('Component mounted.');
+  },
 };
+
 </script>

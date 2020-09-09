@@ -1,12 +1,13 @@
 <template id="">
   <div class="row justify-content-center">
       <div class="col-md-8">
-          <form-component></form-component>
+          <form-component @new="addThought"></form-component>
           <br>
           <thougth-component
             v-for="thougth in thougths"
             :key="thougth.id"
-            :thougth="thougth">
+            :thougth="thougth"
+            >
           </thougth-component>
       </div>
   </div>
@@ -25,6 +26,11 @@
     },
     mounted(){
         console.log('Component thouth mounted')
+    },
+    methods:{
+      addThought(thought){
+        this.thougths.push(thought)
+      }
     }
   }
 </script>

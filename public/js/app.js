@@ -1941,7 +1941,13 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     newThougth: function newThougth() {
-      alert(this.description);
+      var thougth = {
+        id: 2,
+        description: this.description,
+        created_at: '09/09/2020'
+      };
+      this.$emit('new', thougth);
+      this.description = '';
     }
   }
 });
@@ -1971,6 +1977,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1983,6 +1990,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     console.log('Component thouth mounted');
+  },
+  methods: {
+    addThought: function addThought(thought) {
+      this.thougths.push(thought);
+    }
   }
 });
 
@@ -2025,16 +2037,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['thougth'],
   data: function data() {
-    return {
-      thougth: {
-        id: '',
-        description: '',
-        created_at: ''
-      }
-    };
+    return {};
   },
   mounted: function mounted() {
-    console.log("Component mounted.");
+    console.log('Component mounted.');
   }
 });
 
@@ -37708,7 +37714,7 @@ var render = function() {
       "div",
       { staticClass: "col-md-8" },
       [
-        _c("form-component"),
+        _c("form-component", { on: { new: _vm.addThought } }),
         _vm._v(" "),
         _c("br"),
         _vm._v(" "),
@@ -50271,8 +50277,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\laragon\www\laravelandviu\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\laragon\www\laravelandviu\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /var/www/html/laravelandviu/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /var/www/html/laravelandviu/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
